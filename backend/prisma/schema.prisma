@@ -1,0 +1,53 @@
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+model User {
+  id       String   @id @default(cuid())
+  username String @unique
+  fullname String
+  password String
+  gender Gender
+  profilePic String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  conversations Conversation[]
+  messages Message[]
+}
+model Conversation {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  participantIds String[]
+  participants User[]
+
+  messageIds String[]
+  messages Message[]
+}
+
+model Message {
+  id        String   @id @default(cuid())
+ 
+  senderId String
+  sender User @relation(fields: [senderId], references: [id])
+
+  conversationId String
+  conversation Conversation @relation(fields: [conversationId], references: [id])
+  content String
+
+  body String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+//enums are used when we want a variable to have specific set of values
+enum Gender{
+  male
+  female
+}
