@@ -43,9 +43,8 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
           throw new Error(data.error);
         }
         setAuthUser(data);
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (error: any) {
-        console.error(error);
+        console.error(error.message);
         toast.error(error.message);
       } finally {
         setIsLoading(false);
