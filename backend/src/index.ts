@@ -16,7 +16,5 @@ app.use('/api/auth', authRoutes);
 app.use('/api/messages', messageRoutes);
 
 app.listen(PORT, () => {
-  console.log(`Server is running at http://localhost:${PORT}`);
+  console.log(`Your Server is running at http://localhost:${PORT}`);
 });
-
-//"nodemon --watch backend/src --exec node --loader ts-node/esm backend/src/index.ts"
