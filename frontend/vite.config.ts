@@ -7,7 +7,6 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        // the target is gonna be prefixed when we hit api
         target: 'http://localhost:3000',
       },
     },
