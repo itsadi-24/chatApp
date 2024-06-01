@@ -2,10 +2,11 @@ import { Link } from 'react-router-dom';
 import GenderCheckbox from '../components/GenderCheckbox';
 import { useState } from 'react';
 import useSignup from '../hooks/useSignup';
+import toast from 'react-hot-toast';
 
 const SignUp = () => {
   const [inputs, setInputs] = useState({
-    fullName: '',
+    fullname: '',
     username: '',
     password: '',
     confirmPassword: '',
@@ -17,9 +18,15 @@ const SignUp = () => {
     setInputs({ ...inputs, gender });
   };
 
-  const handleSubmitForm = (e: React.FormEvent) => {
+  const handleSubmitForm = async (e: React.FormEvent) => {
     e.preventDefault();
-    signup(inputs);
+    try {
+      await signup(inputs);
+    } catch (error: any) {
+      console.error(error);
+      toast.error(error.message);
+      return;
+    }
   };
 
   return (
@@ -36,11 +43,11 @@ const SignUp = () => {
             </label>
             <input
               type='text'
-              placeholder='Enter Your Full name'
+              placeholder='John Doe'
               className='w-full h-10 input input-bordered'
-              value={inputs.fullName}
+              value={inputs.fullname}
               onChange={(e) =>
-                setInputs({ ...inputs, fullName: e.target.value })
+                setInputs({ ...inputs, fullname: e.target.value })
               }
             />
           </div>
@@ -51,7 +58,7 @@ const SignUp = () => {
             </label>
             <input
               type='text'
-              placeholder='Enter your User name'
+              placeholder='johndoe'
               className='w-full h-10 input input-bordered'
               value={inputs.username}
               onChange={(e) =>

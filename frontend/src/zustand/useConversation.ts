@@ -1,10 +1,4 @@
 import { create } from 'zustand';
-
-// export type ConversationType = {
-//   id: string;
-//   fullname: string;
-//   profilePic: string;
-// };
 export type MessageType = {
   id: string;
   body: string;

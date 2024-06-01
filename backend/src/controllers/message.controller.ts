@@ -58,7 +58,7 @@ export const sendMessage = async (req: Request, res: Response) => {
     res.status(500).json({ message: 'Internal server error' });
   }
 };
-export const getMessage = async (req: Request, res: Response) => {
+export const getMessages = async (req: Request, res: Response) => {
   try {
     const { id: userToChatId } = req.params;
     const senderId = req.user.id;
